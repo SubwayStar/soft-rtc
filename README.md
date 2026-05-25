@@ -1,5 +1,7 @@
 # Soft RTC
 
+Languages: [English](README.md) | [简体中文](README.zh-CN.md)
+
 This repository contains the code for **Action-Prior Denoising for Smooth Real-Time Chunking**.
 
 Soft RTC extends training-time real-time chunking (RTC) for flow-matching action-chunk policies. Instead of using only a binary committed-prefix mask, it trains overlap tokens with token-wise action-prior weights. The result is a lightweight deployment rule that keeps the fast inference profile of training-time RTC while exposing a smoothness-performance tradeoff.
