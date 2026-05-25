@@ -25,15 +25,50 @@ Soft RTC adds token-wise action-prior weighting, soft-conditioning window rules,
 
 The real-robot experiments in the paper used an OpenPI/LeRobot-style deployment stack, but this compact release does not redistribute OpenPI runtime code. If OpenPI-derived deployment code is later added to this repository, keep OpenPI's Apache-2.0 license notices and clearly mark modified files.
 
-## Setup
+## Deployment
+
+Clone the repository with its Kinetix submodule:
+
+```bash
+git clone --recurse-submodules git@github.com:SubwayStar/soft-rtc.git
+cd soft-rtc
+```
+
+If you cloned without `--recurse-submodules`, initialize the submodule manually:
 
 ```bash
 git submodule update --init --recursive
+```
+
+Install `uv` and create the Python environment:
+
+```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 uv sync
 ```
 
-The default dependency set uses `jax[cuda12]`. If you need a CPU-only or different CUDA setup, install the matching JAX wheel for your machine and then run the scripts with the same command pattern.
+The default dependency set uses `jax[cuda12]`. This is appropriate for a CUDA 12 GPU workstation. For CPU-only machines or a different CUDA version, install the matching JAX wheel for your platform and keep the rest of the workflow unchanged.
+
+Run a lightweight import check after installation:
+
+```bash
+uv run python - <<'PY'
+import jax
+import kinetix
+print("JAX devices:", jax.devices())
+print("Kinetix import: ok")
+PY
+```
+
+The code can also be deployed from an existing checkout by pulling the latest version and updating the submodule:
+
+```bash
+git pull
+git submodule update --init --recursive
+uv sync
+```
+
+This repository contains the simulator-side training and evaluation code. It does not include OpenPI real-robot deployment code or large released RTC assets.
 
 ## Download public RTC assets
 
@@ -44,6 +79,17 @@ uv run src/download_public_assets.py
 ```
 
 This downloads the 12 large Kinetix levels used in the paper. The full demonstration data is large; the base behavior-cloning checkpoints are much smaller.
+
+After the assets are downloaded, a quick single-level smoke test can be run with:
+
+```bash
+uv run src/eval_public_finetunes_incremental.py \
+  --config.level-paths worlds/l/grasp_easy.json \
+  --config.output-csv eval_output/smoke_test.csv \
+  --config.overwrite
+```
+
+The command should create CSV outputs under `eval_output/`. For full reproduction, use the training, evaluation, ablation, and figure-generation commands below.
 
 ## Train hard and soft training-time RTC
 
