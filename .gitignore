@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+venv/
+
+# Local experiment artifacts
+public-assets/
+logs-bc/
+logs-expert/
+log_real/
+wandb/
+rendered_levels/
+
+# Generated media and paper artifacts
+docs/figures/*.pdf
+docs/figures/*.png
+*.mp4
+*.gif
+*.zip
+*.pdf
+
+# Partial downloads and temporary files
+*.part
+*.tmp
+*.log
+
+# Keep lightweight CSV results tracked.
+!eval_output/**/*.csv

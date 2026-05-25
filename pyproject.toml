@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=64.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "soft-rtc"
+version = "0.1.0"
+description = "Soft real-time chunking with action-prior denoising for flow-matching action policies."
+requires-python = ">=3.11"
+dependencies = [
+    "jax[cuda12]==0.4.35",
+    "flax",
+    "optax",
+    "numpy==1.26.4",
+    "pandas",
+    "matplotlib",
+    "pillow",
+    "imageio",
+    "requests",
+    "tensorflow-probability",
+    "tyro",
+    "einops",
+    "tqdm-loggable",
+    "wandb",
+    "kinetix",
+]
+
+[tool.uv.sources]
+kinetix = { path = "third_party/kinetix", editable = true }
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint.isort]
+force-single-line = true
+force-sort-within-sections = true
+single-line-exclusions = ["collections.abc", "typing", "typing_extensions"]
+known-third-party = ["wandb"]

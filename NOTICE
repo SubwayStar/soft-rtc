@@ -1,0 +1,21 @@
+Soft RTC
+
+This repository contains modifications and experiment scripts for Soft RTC.
+
+Portions of the simulator training and evaluation code are derived from the
+public RTC Kinetix code released by Physical Intelligence for:
+
+- Real-Time Execution of Action Chunking Flow Policies
+- Training-Time Action Conditioning for Efficient Real-Time Chunking
+
+The upstream RTC Kinetix code is distributed under the MIT License. The original
+copyright and license text are retained in LICENSE.
+
+The Soft RTC modifications include token-wise action-prior weighting, delay
+scaled / fixed / offset soft-conditioning windows, training-time Soft RTC
+fine-tuning scripts, evaluation scripts, ablation scripts, timing scripts, and
+paper-summary figure/table generation utilities.
+
+This release does not redistribute OpenPI real-robot runtime code. If
+OpenPI-derived robot deployment code is added in a future release, retain the
+OpenPI Apache-2.0 license notices and mark modified files accordingly.
