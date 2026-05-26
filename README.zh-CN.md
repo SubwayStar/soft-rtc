@@ -2,6 +2,8 @@
 
 语言: [English](README.md) | [简体中文](README.zh-CN.md)
 
+论文: [arXiv:2605.25537](https://arxiv.org/abs/2605.25537)
+
 本仓库包含论文 **Action-Prior Denoising for Smooth Real-Time Chunking** 的代码。
 
 Soft RTC 是对 training-time real-time chunking (RTC) 的扩展，面向基于 flow matching 的 action-chunk policy。与只使用二值 committed-prefix mask 的方法不同，Soft RTC 对重叠区域中的动作 token 使用连续的 action-prior 权重进行训练。这样可以在保持 training-time RTC 快速推理特性的同时，提供一个可控的平滑性与任务性能折中。
